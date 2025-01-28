@@ -677,6 +677,43 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiChapterChapter extends Schema.CollectionType {
+  collectionName: 'chapters';
+  info: {
+    singularName: 'chapter';
+    pluralName: 'chapters';
+    displayName: 'Chapter';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+    manga: Attribute.Relation<
+      'api::chapter.chapter',
+      'oneToOne',
+      'api::manga.manga'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::chapter.chapter',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::chapter.chapter',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiGroupGroup extends Schema.CollectionType {
   collectionName: 'groups';
   info: {
@@ -700,6 +737,39 @@ export interface ApiGroupGroup extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::group.group',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMangaManga extends Schema.CollectionType {
+  collectionName: 'mangas';
+  info: {
+    singularName: 'manga';
+    pluralName: 'mangas';
+    displayName: 'Manga';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    picture: Attribute.Media;
+    description: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::manga.manga',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::manga.manga',
       'oneToOne',
       'admin::user'
     > &
@@ -768,7 +838,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::chapter.chapter': ApiChapterChapter;
       'api::group.group': ApiGroupGroup;
+      'api::manga.manga': ApiMangaManga;
       'api::person.person': ApiPersonPerson;
     }
   }

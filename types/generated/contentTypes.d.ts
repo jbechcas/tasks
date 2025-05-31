@@ -757,8 +757,8 @@ export interface ApiMangaManga extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String;
-    picture: Attribute.Media;
     description: Attribute.Text;
+    picture: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

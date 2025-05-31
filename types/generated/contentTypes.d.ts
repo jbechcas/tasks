@@ -793,7 +793,6 @@ export interface ApiPersonPerson extends Schema.CollectionType {
     surname: Attribute.String;
     gender: Attribute.Enumeration<['male', 'female', 'other']>;
     birthdate: Attribute.Date;
-    picture: Attribute.Media;
     users_permissions_user: Attribute.Relation<
       'api::person.person',
       'oneToOne',
@@ -804,6 +803,7 @@ export interface ApiPersonPerson extends Schema.CollectionType {
       'oneToOne',
       'api::group.group'
     >;
+    picture: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
